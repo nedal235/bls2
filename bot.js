@@ -17,7 +17,7 @@ client.on('message', function(message) {
     .addField("**# - Reason:**",messageReason,true)
     .addField("**# - Channel:**",message.channel,true)
     .addField("**# - Time:**",message.createdAt,true)
-    .setFooter("لو ان الابلاغ فيه مزح راح يتعرض صاحب الابلاغ لقوبات")
+    .setFooter("لو ان الابلاغ فيه مزح راح يتعرض صاحب الابلاغ لعقوبات")
 message.channel.send(Rembed)
 message.channel.send("__Are you sure you want to send this to the Server owner??__").then(msg => {
     msg.react("✅")
