@@ -1,5 +1,12 @@
 const Discord = require("discord.js");
 const prefix = ("!")
+bot.on("ready", async () => {
+  console.log(`${bot.user.username} is online!`);
+
+  bot.user.setGame("Dont even think to break roles", "https://www.twitch.tv/ninja");
+
+});
+
 client.on('message', function(message) {
     if(message.content.startsWith(prefix + "report")) {
         let messageArgs = message.content.split(" ").slice(1).join(" ");
