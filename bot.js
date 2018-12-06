@@ -1,6 +1,5 @@
 const Discord = require("discord.js");
 const prefix = ("!")
-
 client.on('message', function(message) {
     if(message.content.startsWith(prefix + "report")) {
         let messageArgs = message.content.split(" ").slice(1).join(" ");
