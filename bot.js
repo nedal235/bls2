@@ -10,16 +10,16 @@ client.on('message', function(message) {
     let mUser = message.mentions.users.first();
     if(!mUser) return message.channel.send("Couldn't find user.");
     let Rembed = new Discord.RichEmbed()
-    .setTitle("`New Report!`")
+    .setTitle("`ابلاغ جديد!`")
     .setThumbnail(message.author.avatarURL)
-    .addField("**# - Reported User:**",mUser,true)
-    .addField("**# - Reported User ID:**",mUser.id,true)
-    .addField("**# - Reason:**",messageReason,true)
-    .addField("**# - Channel:**",message.channel,true)
-    .addField("**# - Time:**",message.createdAt,true)
+    .addField("**# - الشخص المبلغ عنة:**",mUser,true)
+    .addField("**# - الاي دي:**",mUser.id,true)
+    .addField("**# - السبب:**",messageReason,true)
+    .addField("**# - المكان:**",message.channel,true)
+    .addField("**# - الوقت:**",message.createdAt,true)
     .setFooter("لو ان الابلاغ فيه مزح راح يتعرض صاحب الابلاغ لعقوبات")
 message.channel.send(Rembed)
-message.channel.send("__Are you sure you want to send this to the Server owner??__").then(msg => {
+message.channel.send("__هل انت متأكد لارسال هذة الرسالو للاونر??__").then(msg => {
     msg.react("✅")
     msg.react("❌")
 .then(() => msg.react('❌'))
@@ -31,12 +31,80 @@ let reaction1 = msg.createReactionCollector(reaction1Filter, { time: 12000 });
 let reaction2 = msg.createReactionCollector(reaction2Filter, { time: 12000 });
 reaction1.on("collect", r => {
     message.guild.owner.send(Rembed)
-    message.reply("**# - Done! 🎇**");
+    message.reply("**# - تم! 🎇**");
 })
 reaction2.on("collect", r => {
-    message.reply("**# - Canceled!**");
+    message.reply("**# - تم الاغلاق!**");
 })
 })
 }
+    if (message.isMentioned(client.user))
+    {
+    message.channel.send(" كيف اقدر اساعدك!!");
+    } 
+	return
+
+	if(message.content.startsWith(prefix + "id")) {
+const idembed = new Discord.RichEmbed()
+  .setTitle('iD')
+  .setDescription(`معرفة الاي دي`)
+  .setThumbnail(`http://s.ppy.sh/a/${user.id}}`)
+  .setColor("#D0436A")
+  .addField('Nickname', user.name, true)
+  .addField('PP', Math.round(user.pp.raw), true)
+  .addField('Rank', user.pp.rank, true)
+  .addField('Level', Math.round(user.level), true)
+  .addBlankField()
+  .addField('Country', user.country, true)
+  .addField('Country Rank', user.pp.countryRank, true)
+  .addField('Playcount', user.counts.plays, true)
+  .addField('Accuracy', `${user.accuracyFormatted}`, true)
+  .setFooter('Requested By ' + message.author.tag, message.author.avatarURL)
+  message.channel.send(idembed)
+		
+		
+		
+	}
+	return
 });
-client.login(process.env.BOT_TOKEN);
+
+client.on('guildMemberAdd', member => {
+    let channel = member.guild.channels.find('name', 'welcome');
+    let memberavatar = member.user.avatarURL
+      if (!channel) return;
+    let embed = new Discord.RichEmbed()
+        .setColor('PURPLE')
+        .setThumbnail(memberavatar)
+        .addField('🎽 | الاسم :  ',`${member}`)
+        .addField('📢 | اطلق من دخل' , `Welcome to the server, ${member}`)
+        .addField('🆔 | user :', "**[" + `${member.id}` + "]**" )
+                .addField('➡| انت العضو رقم',`${member.guild.memberCount}`)
+               
+                  .addField("Name:",`<@` + `${member.id}` + `>`, true)
+                     
+                                     .addField(' الـسيرفر', `${member.guild.name}`,true)
+                                       
+     .setFooter(`${member.guild.name}`)
+        .setTimestamp()
+   
+      channel.sendEmbed(embed);
+    });
+   
+client.on('guildMemberRemove', member => {
+        var embed = new Discord.RichEmbed()
+        .setAuthor(member.user.username, member.user.avatarURL)
+        .setThumbnail(member.user.avatarURL)
+        .setTitle(`بس بعرف وين رحت؟؟؟ :raised_hand::skin-tone-1: :pensive:`)
+        .setDescription(`مع السلامه تشرفنا بك :raised_hand::skin-tone-1: :pensive: `)
+        .addField('👤   تبقي',`**[ ${member.guild.memberCount} ]**`,true)
+        .setColor('PURPLE')
+        .setFooter(`====اهلا السيرفر نور بيك و الله====`, 'https://cdn.discordapp.com/attachments/397818254439219217/399292026782351381/shy.png')
+   
+    var channel =member.guild.channels.find('name', 'welcome')
+    if (!channel) return;
+    channel.send({embed : embed});
+ 
+    });
+	
+   
+	client.login(process.env.BOT_TOKEN);
